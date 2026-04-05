@@ -1,0 +1,262 @@
+/* ============================================================
+   YouTube API OAuth Redirect — Stylesheet
+   Copyright (c) 2025 Otaku Central. All rights reserved.
+   ============================================================ */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --red:       #FF0000;
+  --red-soft:  rgba(255, 0, 0, 0.15);
+  --red-glow:  rgba(255, 0, 0, 0.35);
+  --glass-bg:  rgba(255, 255, 255, 0.08);
+  --glass-bdr: rgba(255, 255, 255, 0.18);
+  --text-pri:  #ffffff;
+  --text-sec:  rgba(255,255,255,0.65);
+  --text-mute: rgba(255,255,255,0.35);
+  --radius:    20px;
+  --transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body {
+  min-height: 100vh;
+  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  background: #0a0a0f;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 2rem;
+  overflow: hidden;
+  position: relative;
+}
+
+/* ── Background orbs ── */
+.bg-orb {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.4;
+  pointer-events: none;
+  animation: drift 12s ease-in-out infinite alternate;
+}
+.bg-orb.red  { width: 520px; height: 520px; background: #ff0000; top: -120px; right: -100px; animation-delay: 0s; }
+.bg-orb.dark { width: 400px; height: 400px; background: #1a003a; bottom: -80px; left: -80px;  animation-delay: -4s; }
+.bg-orb.pink { width: 300px; height: 300px; background: #6600aa; top: 40%;    left: 30%;      animation-delay: -8s; }
+
+@keyframes drift {
+  from { transform: translate(0, 0) scale(1); }
+  to   { transform: translate(30px, 20px) scale(1.08); }
+}
+
+/* ── Main card ── */
+.card {
+  position: relative;
+  width: 100%;
+  max-width: 520px;
+  background: var(--glass-bg);
+  backdrop-filter: blur(32px) saturate(1.6);
+  -webkit-backdrop-filter: blur(32px) saturate(1.6);
+  border: 1px solid var(--glass-bdr);
+  border-radius: var(--radius);
+  padding: 2.5rem 2rem;
+  animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,0.04) inset,
+    0 40px 80px rgba(0,0,0,0.6);
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(32px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* ── YouTube logo area ── */
+.yt-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 1.75rem;
+}
+.yt-icon {
+  width: 40px; height: 40px;
+  background: var(--red);
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 0 24px var(--red-glow);
+  flex-shrink: 0;
+  animation: pulse 2.5s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 20px var(--red-glow); }
+  50%       { box-shadow: 0 0 36px rgba(255,0,0,0.6); }
+}
+.yt-icon svg { width: 22px; height: 22px; fill: white; }
+.yt-label {
+  font-size: 13px; font-weight: 600; color: var(--text-sec);
+  letter-spacing: 0.06em; text-transform: uppercase;
+}
+
+/* ── Status row ── */
+.status-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 1.5rem;
+}
+.status-dot {
+  width: 10px; height: 10px; border-radius: 50%;
+  background: #22c55e;
+  box-shadow: 0 0 10px #22c55e;
+  animation: blink 1.4s ease-in-out infinite;
+  flex-shrink: 0;
+}
+.status-dot.error   { background: var(--red); box-shadow: 0 0 10px var(--red); animation: none; }
+.status-dot.loading { background: #f59e0b; box-shadow: 0 0 10px #f59e0b; }
+@keyframes blink {
+  0%, 100% { opacity: 1; } 50% { opacity: 0.4; }
+}
+.status-text { font-size: 14px; color: var(--text-sec); }
+
+/* ── Headings ── */
+h1 { font-size: 1.6rem; font-weight: 700; color: var(--text-pri); margin-bottom: 0.4rem; line-height: 1.2; }
+.subtitle { font-size: 14px; color: var(--text-sec); margin-bottom: 2rem; line-height: 1.5; }
+
+/* ── Param cards ── */
+.params-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 1.75rem;
+}
+.param-card {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 12px;
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  transition: border-color var(--transition), background var(--transition);
+  animation: fadeIn 0.4s ease both;
+}
+.param-card:hover {
+  border-color: rgba(255,255,255,0.22);
+  background: rgba(255,255,255,0.08);
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.param-label {
+  font-size: 11px; font-weight: 600; color: var(--text-mute);
+  text-transform: uppercase; letter-spacing: 0.07em;
+}
+.param-value {
+  font-size: 13px; color: var(--text-pri);
+  font-family: 'SF Mono', 'Fira Code', monospace;
+  word-break: break-all;
+  line-height: 1.4;
+}
+.param-value.missing  { color: rgba(255, 80, 80, 0.8); font-style: italic; font-family: inherit; }
+.param-value.token    { color: #86efac; }
+.param-value.error-val { color: #fca5a5; }
+
+/* ── Divider ── */
+.divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.12), transparent);
+  margin: 1.5rem 0;
+}
+
+/* ── Raw params toggle ── */
+.raw-toggle {
+  background: none; border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 10px; color: var(--text-sec); font-size: 13px;
+  padding: 8px 14px; cursor: pointer; width: 100%;
+  display: flex; align-items: center; justify-content: space-between;
+  transition: background var(--transition), border-color var(--transition);
+  margin-bottom: 0;
+}
+.raw-toggle:hover { background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.2); }
+.raw-toggle .arrow { transition: transform 0.3s ease; font-size: 11px; }
+.raw-toggle.open .arrow { transform: rotate(180deg); }
+
+.raw-box {
+  max-height: 0; overflow: hidden;
+  transition: max-height 0.4s cubic-bezier(0.4,0,0.2,1), opacity 0.3s;
+  opacity: 0;
+}
+.raw-box.open { max-height: 300px; opacity: 1; margin-top: 10px; }
+.raw-pre {
+  background: rgba(0,0,0,0.35);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 10px;
+  padding: 14px;
+  font-size: 12px;
+  font-family: 'SF Mono', 'Fira Code', monospace;
+  color: #a3e635;
+  white-space: pre-wrap;
+  word-break: break-all;
+  line-height: 1.6;
+}
+
+/* ── Action buttons ── */
+.actions { display: flex; gap: 10px; margin-top: 1.5rem; flex-wrap: wrap; }
+.btn {
+  flex: 1; min-width: 120px;
+  padding: 11px 20px;
+  border-radius: 12px;
+  font-size: 14px; font-weight: 600;
+  cursor: pointer; border: none;
+  transition: transform 0.15s, box-shadow 0.2s, opacity 0.2s;
+  letter-spacing: 0.02em;
+}
+.btn:active { transform: scale(0.97); }
+.btn-primary {
+  background: var(--red);
+  color: white;
+  box-shadow: 0 4px 20px var(--red-glow);
+}
+.btn-primary:hover { box-shadow: 0 6px 28px rgba(255,0,0,0.5); }
+.btn-secondary {
+  background: rgba(255,255,255,0.08);
+  color: var(--text-pri);
+  border: 1px solid rgba(255,255,255,0.14);
+}
+.btn-secondary:hover { background: rgba(255,255,255,0.13); }
+
+/* ── Footer / credentials note ── */
+.footer {
+  text-align: center;
+  margin-top: 1.75rem;
+  font-size: 12px;
+  color: var(--text-mute);
+}
+.footer a { color: rgba(255,255,255,0.4); text-decoration: underline; }
+
+/* ── Toast notification ── */
+.toast {
+  position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%) translateY(20px);
+  background: rgba(30,30,40,0.95);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 10px;
+  padding: 10px 20px;
+  font-size: 13px; color: var(--text-pri);
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.3s, transform 0.3s;
+  z-index: 999;
+  white-space: nowrap;
+}
+.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+/* ── Copyright bar ── */
+.copyright {
+  margin-top: 1.5rem;
+  font-size: 11px;
+  color: var(--text-mute);
+  text-align: center;
+  letter-spacing: 0.04em;
+  user-select: none;
+}

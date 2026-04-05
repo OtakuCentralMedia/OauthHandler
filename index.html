@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>YouTube API — OAuth Redirect</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Background orbs -->
+  <div class="bg-orb red"></div>
+  <div class="bg-orb dark"></div>
+  <div class="bg-orb pink"></div>
+
+  <!-- Main card -->
+  <div class="card" id="card">
+
+    <div class="yt-logo">
+      <div class="yt-icon">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1C4.5 20.4 12 20.4 12 20.4s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8zM9.8 15.6V8.4l6.3 3.6-6.3 3.6z"/>
+        </svg>
+      </div>
+      <div class="yt-label">YouTube Data API v3 · OAuth 2.0</div>
+    </div>
+
+    <div class="status-row" id="statusRow">
+      <div class="status-dot loading" id="statusDot"></div>
+      <div class="status-text" id="statusText">Reading redirect parameters…</div>
+    </div>
+
+    <h1 id="heading">Authenticating…</h1>
+    <p class="subtitle" id="subtext">Parsing URL parameters from YouTube OAuth response.</p>
+
+    <div class="params-grid" id="paramsGrid"></div>
+
+    <div class="divider"></div>
+
+    <button class="raw-toggle" id="rawToggle" onclick="toggleRaw()">
+      <span>Raw URL parameters</span>
+      <span class="arrow">▼</span>
+    </button>
+    <div class="raw-box" id="rawBox">
+      <pre class="raw-pre" id="rawPre"></pre>
+    </div>
+
+    <div class="actions" id="actions"></div>
+
+    <div class="footer">
+      Redirect URI must match your <a href="https://console.cloud.google.com/apis/credentials" target="_blank">Google Cloud Console</a> credentials.
+    </div>
+
+  </div>
+
+  <!-- Toast notification -->
+  <div class="toast" id="toast"></div>
+
+  <!-- Copyright -->
+  <p class="copyright">© 2025 Otaku Central. All rights reserved.</p>
+
+  <script src="script.js"></script>
+</body>
+</html>
