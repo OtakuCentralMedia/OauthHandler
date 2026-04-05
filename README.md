@@ -1,5 +1,7 @@
 # OauthHandler
 
+![image.png](https://github.com/OtakuCentralMedia/OauthHandler/blob/main/preview.png?raw=true)
+
 A lightweight, front-end OAuth 2.0 redirect handler built with vanilla HTML, CSS, and JavaScript. Designed specifically for the **YouTube Data API v3** via Google OAuth 2.0, OauthHandler parses and displays the credentials and scopes returned by Google's authorization server — making it easy to inspect, copy, and integrate tokens into your broader application framework.
 
 
